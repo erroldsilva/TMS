@@ -1,0 +1,29 @@
+/** all devices and responsive browser windows **/
+@media screen and (max-width: 800px) {
+	body {
+		padding: 10px 15px;
+	}
+	.container {
+		width: 100%;
+	}
+	.login .userpass {
+		width: 85%;
+	}
+	.login .userid {
+		width: 85%;
+	}
+	
+}
+
+
+/* smaller screen dropoff *******/
+@media only screen and (max-width: 550px) {
+ 	.login .userpass {
+		width: 80%;
+	}
+	
+	.login .userid {
+		width: 80%;
+	}
+}
+

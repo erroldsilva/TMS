@@ -1,0 +1,36 @@
+<html>
+
+<head>
+
+    <script type="application/javascript" src="/js/jquery-2.1.1.min.js"></script>
+    <script type="application/javascript" src="/js/jquery-ui-1.10.4.custom.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Ticket Managment System</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>
+           Ticket Mangement System
+        </h2>
+        <section class="loginform cf">
+            <div style="float: left; width:20%; height: 100%" id = "menu">Left Div</div>
+            <div style="float: center; width:80%; height: 100%" id = "form"> </div>
+        </section>
+    </div>
+    <script>
+        $(document).ready(function () {
+            //once the document is ready load the left menu
+            $.get('/menu', function(data){
+                $('#menu').empty().append(data);
+                //once the left menu is loaded show the edit screen
+                $.get('/form', function(data){
+                    $('#form').empty().append(data);
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

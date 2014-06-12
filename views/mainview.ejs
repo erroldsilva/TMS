@@ -1,0 +1,168 @@
+<%if(!err && !data){%>
+
+    <ul id = "toplevel">  
+        <li><label for="summary">Summary</label>  
+            <input type="text" id = "summary" name="summary" placeholder="Some Problem In.." required>
+        </li>
+        <li>
+            <label for="comment">Comment</label>  
+            <input type="text" id="comment" name="comment" placeholder="Comment...." required>
+        </li> 
+        <li>
+            <label for="comment">Who Are You</label>  
+            <select id = "user">
+                <option value="0">Amar</option>
+                <option value="1">Becky</option>
+                <option value="2">Caran</option>
+                <option value="3">Dave</option>
+            </select> 
+        </li> 
+        <li>
+            <label for="comment">Status</label>  
+            <select id = "status">
+                <option value="0">Open</option>
+                <option value="1">Closed</option>
+                <option value="2">In-Progress</option>
+            </select> 
+        </li> 
+        <li>
+            <label for="comment">Owner</label>  
+            <select id ="admin">
+                <option value="0">Steve</option>
+                <option value="1">Bill</option>
+                <option value="2">Lesper</option>
+            </select> 
+        </li> 
+
+        <li>  
+            <input type="reset" value="Cancel" >
+            <input type="button" value="Submit"  id='btsub'  edit='false' />
+        </li>  
+        
+        <div class="message"></div>
+        
+    </ul>  
+<%}%>
+<%if(!err && data){%>
+        <ul id = "toplevel" >  
+            <li><label for="summary">Summary</label>  
+                <input type="text" id = "summary" name="summary" placeholder="Some Problem In.." value ="<%=data.summary%>" required>
+            </li>
+            <li>
+                <label for="comment">Comment</label>  
+                <input type="text" id="comment" name="comment" placeholder="Comment...."  value ="<%=data.comments%>" required>
+            </li>  
+
+            
+            <li>
+                <label for="comment"><%=data.user_id%></label>  
+                <select id = "user">
+                    <option value="0">Amar</option>
+                    <option value="1">Becky</option>
+                    <option value="2">Caran</option>
+                    <option value="3">Dave</option>
+                </select> 
+            </li> 
+            <li>
+                <label for="comment"><%=data.status%></label>  
+                <select id = "status">
+                    <option value="0">Open</option>
+                    <option value="1">Closed</option>
+                    <option value="2">In-Progress</option>
+                </select> 
+            </li> 
+            <li>
+                <label for="comment"><%=data.admin_name%></label>  
+                <select id ="admin">
+                    <option value="0">Steve</option>
+                    <option value="1">Bill</option>
+                    <option value="2">Lesper</option>
+                </select> 
+            </li> 
+            
+            <li>  
+                <input type="reset" value="Cancel" >
+                <%if(data.status.toLowerCase() != 'closed'){%>
+                 <input type="button" value="Update" id='btsub' edit='true' />
+                <%}%>
+            </li>  
+
+            <div class="message"></div>
+
+        </ul>  
+       
+    
+<%}%>
+<script>
+    
+    //$(function() {
+    $(document).ready(function(){
+        //submitsz the form data to the server as either a new item or a item to be updated
+        $('#btsub').on('click',function(){
+            
+            //get all the user input
+            
+            var summary = $('#summary').val();
+            var comment = $('#comment').val();
+            var user = $('#user').val();
+            var status = $('#status').val();
+            var admin = $('#admin').val();
+            console.log(summary + ' ' + comment + ' ' + user + ' ' + status + ' ' + ' ' + admin);
+            var payload = {
+                userid: user,
+                adminName: admin,
+                status: status,
+                comment: comment,
+                summary: summary
+            }
+            
+            
+            //check if its in edit mode or new mode
+            var edit = $('#btsub').attr('edit');
+            if(edit=='true'){
+                //send a reuwst to update data
+                var index = $( ".ui-selected" ).attr('dataid');
+                console.log(index);
+                $.post('/update', {ticket: payload, id: index}, function(err, resp){
+                    if(!err){
+                        //if the request is successfull reload the menu & form
+                        $.get('/menu', function(data){
+                            $('#menu').empty().append(data);
+                            $.get('/form', function(data){
+                                $('#form').empty().append(data);
+                            });
+                        });
+                        alert('Saved');
+                    }                  
+                    else
+                        alert('Error Saving');
+                });
+                
+                
+            }else{  
+                //send a request to save a new entry
+                $.post('/save', {ticket: payload}, function(err, resp){
+                    if(!err){
+                        //if the request is successfull reload the menu & form
+                        $.get('/menu', function(data){
+                            $('#menu').empty().append(data);
+                            $.get('/form', function(data){
+                                $('#form').empty().append(data);
+                            });
+                        });
+                        alert('Saved');
+                    }                  
+                    else
+                        alert('Error Saving');
+                });
+            }
+          
+        });
+    });
+
+ 
+
+    
+   
+
+</script>
