@@ -4,4 +4,4 @@ node_js:
 install: npm install
 after_success: 
 - chmod 600 deploy/errol.pem
-- sh deploy/CookNBoot.sh deploy/errol.pem ubuntu@ec2-54-200-216-146.us-west-2.compute.amazonaws.com
+- sh deploy/CookNBoot.sh deploy/errol.pem ubuntu@ec2-54-187-113-204.us-west-2.compute.amazonaws.com
