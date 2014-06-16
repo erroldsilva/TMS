@@ -2,5 +2,6 @@ language: node_js
 node_js:
   - "0.10"
 install: npm install
-after_success: cd ~/
-ls
+after_success: 
+- cd ~/
+- 1ls
