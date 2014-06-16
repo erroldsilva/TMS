@@ -75,4 +75,4 @@ TMS.prototype.launchServer = function (port) {
 
 
 var tms = new TMS();
-tms.launchServer(3000);
+tms.launchServer(80);
