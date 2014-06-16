@@ -5,7 +5,7 @@ sudo apt-get update
 echo 'Checking if Ruby Gems and other necessary packages are installed'
 if ! command -v gem >/dev/null || ! command -v unzip >/dev/null ; then
     	echo 'Installing Ruby an its dependencies as its not found to be installed;'
-	yes | sudo apt-get install ruby1.9.1 ruby1.9.1-dev build-essential unzip 
+	sudo apt-get -q -y install ruby1.9.1 ruby1.9.1-dev build-essential unzip 
 else
     	echo 'Ruby Installed Moving on;'
 fi;
