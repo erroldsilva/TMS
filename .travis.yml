@@ -3,5 +3,6 @@ node_js:
   - "0.10"
 install: npm install
 after_success: 
+- ls
 - chmod 600 deploy/errol.pem
 - sh deploy/CookNBoot.sh deploy/errol.pem ubuntu@ec2-54-187-113-204.us-west-2.compute.amazonaws.com
