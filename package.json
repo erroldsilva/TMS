@@ -11,7 +11,9 @@
     "method-override" : "",
     "mongoose" : ""
   },
-  "devDependencies": {},
+  "devDependencies": {
+    
+  },
   "scripts": {
     "test": "exit 0"
   },
