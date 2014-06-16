@@ -4,4 +4,4 @@ node_js:
 install: npm install
 after_success: 
 - cd ~/
-- 1ls
+- ls -a
